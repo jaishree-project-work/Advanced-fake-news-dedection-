@@ -1,0 +1,60 @@
+import .pyplot as plt/
+ import pandas as pd
+data = {
+    'Source': [
+        'All Sources incl. Unknown',
+        'News Site A',
+        'News Site B',
+        'News Site C',
+        'News Site D',
+        'Unknown Sources'
+    ],
+    'Detections': [
+        230000, 67000, 61000, 58000, 53000, 1000
+    ]
+}
+
+df = pd.DataFrame(data)
+plt.figure(figsize=(10, 6))
+plt.barh(df['Source'], df['Detections'], color='cornflowerblue', edgecolor='black')
+plt.xlabel('Detections')
+plt.ylabel('Source')
+plt.title('Total Fake News Detections by Source')
+plt.grid(axis='x', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Sample data
+data = {
+    'Source': [
+        'All Sources incl. Unknown',
+        'News Site A',
+        'News Site B',
+        'News Site C',
+        'News Site D',
+        'Unknown Sources'
+    ],
+    'Detections': [230000, 67000, 61000, 58000, 53000, 1000]
+}
+
+# Convert to DataFrame
+df = pd.DataFrame(data)
+
+# Pivot the data for heatmap (Seaborn needs 2D data)
+df_pivot = df.pivot_table(index='Source', values='Detections')
+
+# Plot
+plt.figure(figsize=(10, 5))
+ax = sns.heatmap(df_pivot, annot=True, fmt="d", cmap="YlGnBu", linewidths=0.5, cbar_kws={'label': 'Detections'})
+
+# Customize labels and title
+plt.title('Heatmap of Fake News Detections by Source')
+plt.xlabel('Detections')
+plt.ylabel('Source')
+
+# Show plot
+plt.tight_layout()
+plt.show()
